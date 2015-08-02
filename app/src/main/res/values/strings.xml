@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">FitnessTestApp</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="rm_calc_title">One Rep Max</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="reps_label">Reps</string>
+    <string name="enter">Enter</string>
+
+    <string name="tdee_calc_title">TDEE Calculator</string>
+    <string name="height_label">Height (cm)</string>
+    <string name="age_label">Age (yr)</string>
+    <string name="gender_label">Gender</string>
+    <string name="female_label">Female</string>
+    <string name="male_label">Male</string>
+    <string name="activity_label">Activity level</string>
+    <string-array name="activity_entries">
+        <item>BMR</item>
+        <item>Sedentary</item>
+        <item>Light</item>
+        <item>Moderate</item>
+        <item>Heavy</item>
+        <item>Very Heavy</item>
+    </string-array>
+
+    <string name="str_std_title">Strength Standards</string>
+    <string name="untrained_label">Untrained\n---</string>
+    <string name="beginner_label">Beginner\n---</string>
+    <string name="intermediate_label">Intermediate\n---</string>
+    <string name="advanced_label">Advanced\n---</string>
+    <string name="elite_label">Elite\n---</string>
+    <string name="ohp_label">Overhead Press</string>
+    <string name="dl_label">Deadlift</string>
+    <string name="bp_label">Bench Press</string>
+    <string name="squat_label">Squat</string>
+
+</resources>
