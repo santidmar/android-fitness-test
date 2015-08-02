@@ -1,0 +1,37 @@
+Name: Fitness App ( temp name )
+
+Project Description:
+    Android app that'll keep track of weights and generate personal routines, and additional utilities such as
+    calculating daily TDEE, Macros, One Rep Max, Strength Standards.
+
+Features:
+    - Keep track of gym weights
+    - Recommend weights
+    - Generate a routine/schedule
+    - TDEE Calculator - Done
+    - Macros
+    - Strength Standards - Done
+    - One Rep Max Calculator ( *Maybe* ) - Done
+    - Use a JSON, SQL, or something to store data
+    - Graphs, Charts, Visual Data, maybe calculate future progress
+    - Choose Routines
+    - Personal Info
+	- Profile Page type of thing
+	    - Name
+	    - Age
+	    - Height
+	    - Weight
+	    - Current Routine
+
+    - Social Network type of thing
+	- Share progress
+	- See other people's profiles
+	- Make goals with other people
+	    -Collectively try to lift a weight
+	- Achievements
+    - Android Watch support
+    - IAP ideas
+	- Ad Remover
+
+Possible names:
+    - PRESS - Weightlifting Companion
