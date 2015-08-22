@@ -42,4 +42,15 @@
     <string name="protein_label">Protein</string>
     <string name="carb_default">40%</string>
     <string name="macro_default">30%</string>
+
+    <string name="routine_title">Routines</string>
+    <string name="routine_title_hint">Enter a title for the routine.</string>
+    <string name="routine_cycle_hint">Cycle Length</string>
+    <string name="routine_days_hint">Days a Week</string>
+    <string name="week">Week </string>
+    <string name="workout">Workout </string>
+    <string name="routine_exercise_hint">Exercise Name</string>
+    <string name="routine_reps_hint">Reps</string>
+    <string name="routine_sets_hint">Sets</string>
+    <string name="routine_add_exercise">Add Exercise</string>
 </resources>

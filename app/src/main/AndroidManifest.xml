@@ -25,6 +25,9 @@
         <activity
             android:name=".StrStdActivity"
             android:label="@string/str_std_title"/>
+        <activity
+            android:name=".RoutineActivity"
+            android:label="@string/routine_title"/>
     </application>
 
 </manifest>

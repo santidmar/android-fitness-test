@@ -11,7 +11,7 @@ import android.widget.ListView;
 public class FitnessListFragment extends ListFragment {
     private static final String TAG = "FitnessListFragment";
     private static final String[] LIST_ITEMS = { "One-Rep Max Calc",
-            "TDEE Calc", "Strength Standards" };
+            "TDEE Calc", "Strength Standards", "Routines" };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,9 @@ public class FitnessListFragment extends ListFragment {
                 break;
             case 2:
                 i = new Intent(getActivity(), StrStdActivity.class);
+                break;
+            case 3:
+                i = new Intent(getActivity(), RoutineActivity.class);
                 break;
             default:
                 return;
