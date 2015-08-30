@@ -36,7 +36,7 @@ public class FitnessListFragment extends ListFragment {
                 i = new Intent(getActivity(), StrStdActivity.class);
                 break;
             case 3:
-                i = new Intent(getActivity(), RoutineActivity.class);
+                i = new Intent(getActivity(), RoutineListActivity.class);
                 break;
             default:
                 return;
