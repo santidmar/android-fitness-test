@@ -1,6 +1,6 @@
 package org.github.gulfclob.androidfitnesstest;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 
 public class RoutineListActivity extends SingleFragmentActivity {
     @Override
