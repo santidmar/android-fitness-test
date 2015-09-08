@@ -2,6 +2,9 @@ package org.github.gulfclob.androidfitnesstest;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -12,8 +15,9 @@ import android.widget.EditText;
 import java.util.UUID;
 
 public class RoutineFragment extends Fragment {
-    private static final String ARG_ROUTINE_ID = "routine_id";
+    public static final String ARG_ROUTINE_ID = "routine_id";
     private Routine mRoutine;
+    private ViewPager mViewPager;
     private EditText mTitleField, mCycleLengthField,
             mDaysWeekField;
 
@@ -67,8 +71,10 @@ public class RoutineFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!s.toString().equals(""))
+                if (!s.toString().equals("")) {
                     mRoutine.setCycleLength(Integer.parseInt(s.toString()));
+                    mViewPager.getAdapter().notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -88,6 +94,7 @@ public class RoutineFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (!s.toString().equals(""))
                     mRoutine.setDaysAWeek(Integer.parseInt(s.toString()));
+                    mViewPager.getAdapter().notifyDataSetChanged();
             }
 
             @Override
@@ -96,7 +103,30 @@ public class RoutineFragment extends Fragment {
             }
         });
 
+        mViewPager = (ViewPager)v.findViewById(R.id.routine_pager);
+        mViewPager.setAdapter(new RoutinePagerAdapter(getActivity().getSupportFragmentManager(), mRoutine));
 
         return v;
+    }
+
+    public static class RoutinePagerAdapter extends FragmentPagerAdapter {
+        private Routine mRoutine;
+
+        public RoutinePagerAdapter(FragmentManager fragmentManager, Routine routine) {
+            super(fragmentManager);
+            mRoutine = routine;
+        }
+
+        // Returns total number of pages
+        @Override
+        public int getCount() {
+            return mRoutine.getExercises().size();
+        }
+
+        // Returns the fragment to display for that page
+        @Override
+        public Fragment getItem(int position) {
+            return WeekFragment.newInstance(mRoutine.getId(), position);
+        }
     }
 }
