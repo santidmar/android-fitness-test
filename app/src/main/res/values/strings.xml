@@ -52,5 +52,7 @@
     <string name="routine_exercise_hint">Exercise Name</string>
     <string name="routine_reps_hint">Reps</string>
     <string name="routine_sets_hint">Sets</string>
+    <string name="routine_intensity_hint">Intensity</string>
+    <string name="routine_intensity_label">% 1RM</string>
     <string name="routine_add_exercise">Add Exercise</string>
 </resources>

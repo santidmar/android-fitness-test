@@ -4,14 +4,13 @@ public class Exercise {
     private String mTitle;
     private int mSets;
     private int mReps;
-    private double mIntensity;
+    private int mIntensity;
 
-    public Exercise(String title, int sets, int reps,
-                    double intensity) {
-        mTitle = title;
-        mSets = sets;
-        mReps = reps;
-        mIntensity = intensity;
+    public Exercise() {
+        mTitle = "";
+        mSets = 0;
+        mReps = 0;
+        mIntensity = 0;
     }
 
     public String getTitle() {
@@ -30,19 +29,17 @@ public class Exercise {
         mSets = sets;
     }
 
-    public int getReps() {
-        return mReps;
-    }
+    public int getReps() { return mReps; }
 
     public void setReps(int reps) {
         mReps = reps;
     }
 
-    public double getIntensity() {
+    public int getIntensity() {
         return mIntensity;
     }
 
-    public void setIntensity(double intensity) {
+    public void setIntensity(int intensity) {
         mIntensity = intensity;
     }
 }

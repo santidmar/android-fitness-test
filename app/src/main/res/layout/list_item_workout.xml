@@ -22,7 +22,7 @@
             android:text="@string/routine_add_exercise"/>
     </LinearLayout>
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/workout_exercise_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

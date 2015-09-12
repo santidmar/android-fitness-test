@@ -12,9 +12,9 @@
         android:text="@string/week"
         android:padding="4dp"/>
 
-    <ListView
-        android:id="@+id/routine_workout_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/workout_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"/>
 
 </LinearLayout>

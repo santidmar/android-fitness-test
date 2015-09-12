@@ -4,13 +4,11 @@ package org.github.gulfclob.androidfitnesstest;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 public class Routine {
     private UUID mId;
     private String mTitle;
-    private Date mDateCreated;
 
     private int mDaysAWeek;
     private int mCycleLength;
@@ -23,8 +21,7 @@ public class Routine {
 
     public Routine() {
         mId = UUID.randomUUID();
-        mDateCreated = new Date();
-        mExercises = new ArrayList<ArrayList<ArrayList<Exercise>>>();
+        mExercises = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -41,14 +38,6 @@ public class Routine {
 
     public void setTitle(String title) {
         mTitle = title;
-    }
-
-    public Date getDateCreated() {
-        return mDateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        mDateCreated = dateCreated;
     }
 
     public int getDaysAWeek() {
@@ -76,6 +65,12 @@ public class Routine {
     public void setCycleLength(int cycleLength) {
         mCycleLength = cycleLength;
 
+        while (mExercises.size() < cycleLength) {
+            ArrayList<ArrayList<Exercise>> newWeek = new ArrayList<>();
+            for (int i = 0; i < mDaysAWeek; i++)
+                newWeek.add(new ArrayList<Exercise>());
+            mExercises.add(newWeek);
+        }
         while (mExercises.size() < cycleLength)
             mExercises.add(new ArrayList<ArrayList<Exercise>>());
         while (mExercises.size() > cycleLength)
@@ -87,9 +82,5 @@ public class Routine {
 
     public ArrayList<ArrayList<ArrayList<Exercise>>> getExercises() {
         return mExercises;
-    }
-
-    public void setExercises(ArrayList<ArrayList<ArrayList<Exercise>>> exercises) {
-        mExercises = exercises;
     }
 }

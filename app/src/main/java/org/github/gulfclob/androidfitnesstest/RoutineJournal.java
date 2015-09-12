@@ -22,8 +22,8 @@ public class RoutineJournal {
         for (int i = 0; i < 33; i++) {
             Routine routine = new Routine();
             routine.setTitle("Routine #" + i);
-            routine.setDaysAWeek(i % 7 + 1);
             routine.setCycleLength(i);
+            routine.setDaysAWeek(i % 7 + 1);
             mRoutines.add(routine);
         }
     }
