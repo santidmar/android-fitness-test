@@ -13,6 +13,13 @@ public class Exercise {
         mIntensity = 0;
     }
 
+    public Exercise(String title, int sets, int reps, int intensity) {
+        mTitle = title;
+        mSets = sets;
+        mReps = reps;
+        mIntensity = intensity;
+    }
+
     public String getTitle() {
         return mTitle;
     }

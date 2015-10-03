@@ -55,4 +55,14 @@
     <string name="routine_intensity_hint">Intensity</string>
     <string name="routine_intensity_label">% 1RM</string>
     <string name="routine_add_exercise">Add Exercise</string>
+
+    <string name="routine_template_label">Routine Template</string>
+    <string-array name="routine_template_titles">
+        <item>Custom</item>
+        <item>Texas Method</item>
+        <item>5/3/1 Big but Boring</item>
+        <item>5/3/1 Triumverate</item>
+        <item>Smolov Jr.</item>
+        <item>Smolov</item>
+    </string-array>
 </resources>
