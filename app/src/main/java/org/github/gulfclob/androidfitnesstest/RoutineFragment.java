@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -71,18 +72,17 @@ public class RoutineFragment extends Fragment {
         mTemplateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // new SetTemplateTask().execute(position);
                 Log.d("RoutineFragment", "onItemSelected called at position " + position);
-                mRoutine.setTemplateId(position);
+                new SetTemplateTask().execute(position);
+                /*mRoutine.setTemplateId(position);
                 if (position != 0) {
                     /* Here, we refresh the View Pager by simply giving it a new adapter.
                        This is pretty bad practice and should be avoided in the final build.
-                     */
                     mViewPager.setAdapter(new RoutinePagerAdapter(getActivity()
                             .getSupportFragmentManager(), mRoutine));
                     mCycleLengthField.setText(Integer.toString(mRoutine.getCycleLength()));
                     mDaysWeekField.setText(Integer.toString(mRoutine.getDaysAWeek()));
-                }
+                }*/
             }
 
             @Override
@@ -142,12 +142,13 @@ public class RoutineFragment extends Fragment {
         });
 
         mViewPager = (ViewPager)v.findViewById(R.id.routine_pager);
-        mViewPager.setAdapter(new RoutinePagerAdapter(getActivity().getSupportFragmentManager(), mRoutine));
+        mViewPager.setAdapter(new RoutinePagerAdapter(getActivity()
+                .getSupportFragmentManager(), mRoutine));
 
         return v;
     }
 
-    public static class RoutinePagerAdapter extends FragmentPagerAdapter {
+    public static class RoutinePagerAdapter extends FragmentStatePagerAdapter {
         private Routine mRoutine;
 
         public RoutinePagerAdapter(FragmentManager fragmentManager, Routine routine) {
@@ -166,18 +167,25 @@ public class RoutineFragment extends Fragment {
         public Fragment getItem(int position) {
             return WeekFragment.newInstance(mRoutine.getId(), position);
         }
+
+
     }
-    /*
-    private class SetTemplateTask extends AsyncTask<Integer, Void, Void> {
-        protected Void doInBackground(Integer... position) {
+
+    private class SetTemplateTask extends AsyncTask<Integer, Void, Integer> {
+        protected Integer doInBackground(Integer... position) {
             mRoutine.setTemplateId(position[0]);
-            return null;
+            return position[0];
         }
 
-        protected void onPostExecute(Void result) {
-            mViewPager.getAdapter().notifyDataSetChanged();
-            mCycleLengthField.setText(Integer.toString(mRoutine.getCycleLength()));
-            mDaysWeekField.setText(Integer.toString(mRoutine.getDaysAWeek()));
+        protected void onPostExecute(Integer result) {
+            if (result != 0) {
+                /* Here, we refresh the View Pager by simply giving it a new adapter.
+                   This is pretty bad practice and should be avoided in the final build.*/
+                mViewPager.setAdapter(new RoutinePagerAdapter(getActivity()
+                        .getSupportFragmentManager(), mRoutine));
+                mCycleLengthField.setText(Integer.toString(mRoutine.getCycleLength()));
+                mDaysWeekField.setText(Integer.toString(mRoutine.getDaysAWeek()));
+            }
         }
-    }*/
+    }
 }
