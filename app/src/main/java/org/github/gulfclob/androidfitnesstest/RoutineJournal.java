@@ -19,17 +19,14 @@ public class RoutineJournal {
 
     private RoutineJournal(Context context) {
         mRoutines = new ArrayList<>();
-        for (int i = 0; i < 33; i++) {
-            Routine routine = new Routine();
-            routine.setTitle("Routine #" + i);
-            routine.setCycleLength(i);
-            routine.setDaysAWeek(i % 7 + 1);
-            mRoutines.add(routine);
-        }
     }
 
     public List<Routine> getRoutines() {
         return mRoutines;
+    }
+
+    public void addRoutine(Routine r) {
+        mRoutines.add(r);
     }
 
     public Routine getRoutine(UUID id) {

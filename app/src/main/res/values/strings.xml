@@ -64,4 +64,6 @@
         <item>5/3/1 Triumverate</item>
         <item>Smolov Jr.</item>
     </string-array>
+
+    <string name="new_routine">New Routine</string>
 </resources>
