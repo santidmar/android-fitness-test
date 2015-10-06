@@ -30,7 +30,8 @@
             android:label="@string/routine_title"/>
         <activity
             android:name=".RoutineActivity"
-            android:label="@string/routine_title"/>
+            android:label="@string/routine_title"
+            android:parentActivityName=".RoutineListActivity"/>
     </application>
 
 </manifest>
