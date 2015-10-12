@@ -1,6 +1,14 @@
 package org.github.gulfclob.androidfitnesstest;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import org.github.gulfclob.androidfitnesstest.RoutineDbSchema.RoutineTable;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +16,8 @@ import java.util.UUID;
 
 public class RoutineJournal {
     private static RoutineJournal sRoutineJournal;
-    private List<Routine> mRoutines;
+    private Context mContext;
+    private SQLiteDatabase mDatabase;
 
     public static RoutineJournal get(Context context) {
         if (sRoutineJournal == null) {
@@ -18,24 +27,94 @@ public class RoutineJournal {
     }
 
     private RoutineJournal(Context context) {
-        mRoutines = new ArrayList<>();
+        mContext = context.getApplicationContext();
+        mDatabase = new RoutineBaseHelper(mContext)
+                .getWritableDatabase();
     }
 
     public List<Routine> getRoutines() {
-        return mRoutines;
+        List<Routine> routines = new ArrayList<>();
+
+        RoutineCursorWrapper cursor = queryRoutines(null, null);
+
+        try {
+            cursor.moveToFirst();
+            while (!cursor.isAfterLast()) {
+                routines.add(cursor.getRoutine());
+                cursor.moveToNext();
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return routines;
     }
 
     public void addRoutine(Routine r) {
-        mRoutines.add(r);
+        ContentValues values = getContentValues(r);
+
+        mDatabase.insert(RoutineTable.NAME, null, values);
     }
 
     public Routine getRoutine(UUID id) {
-        for (Routine routine : mRoutines) {
-            if (routine.getId().equals(id)) {
-                return routine;
+        RoutineCursorWrapper cursor = queryRoutines(
+                RoutineTable.Cols.UUID + " = ?",
+                new String[] { id.toString() }
+        );
+
+        try {
+            if (cursor.getCount() == 0) {
+                return null;
             }
+
+            cursor.moveToFirst();
+            return cursor.getRoutine();
+        } finally {
+            cursor.close();
         }
-        return null;
     }
 
+    public void updateRoutine(Routine routine) {
+        String uuidString = routine.getId().toString();
+        ContentValues values = getContentValues(routine);
+
+        mDatabase.update(RoutineTable.NAME, values,
+                RoutineTable.Cols.UUID + " = ?",
+                new String[] { uuidString });
+    }
+
+    private static ContentValues getContentValues(Routine routine) {
+        ContentValues values = new ContentValues();
+        values.put(RoutineTable.Cols.UUID, routine.getId().toString());
+        values.put(RoutineTable.Cols.TITLE, routine.getTitle());
+        values.put(RoutineTable.Cols.TEMPLATE_ID, routine.getTemplateId());
+        values.put(RoutineTable.Cols.DAYS_A_WEEK, routine.getDaysAWeek());
+        values.put(RoutineTable.Cols.CYCLE_LENGTH, routine.getCycleLength());
+        /*
+        JSONObject routineJson = new JSONObject();
+        try {
+            routineJson.put("exercises", new JSONArray(routine.getExercises()));
+        } catch (JSONException jsonException) {
+            jsonException.printStackTrace();
+        }
+        */
+        values.put(RoutineTable.Cols.EXERCISES, "");
+
+        return values;
+    }
+
+    private RoutineCursorWrapper queryRoutines(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(
+                RoutineTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null,
+                null
+        );
+
+        return new RoutineCursorWrapper(cursor);
+    }
 }

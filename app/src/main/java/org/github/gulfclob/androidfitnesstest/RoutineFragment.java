@@ -105,6 +105,7 @@ public class RoutineFragment extends Fragment {
                     int cycleLength = Integer.parseInt(s.toString());
                     if (cycleLength != mRoutine.getCycleLength()) {
                         mRoutine.setCycleLength(cycleLength);
+                        RoutineJournal.get(getActivity()).updateRoutine(mRoutine);
                         mViewPager.getAdapter().notifyDataSetChanged();
                     }
                 }
@@ -130,6 +131,7 @@ public class RoutineFragment extends Fragment {
                     int daysAWeek = Integer.parseInt(s.toString());
                     if (daysAWeek != mRoutine.getDaysAWeek()) {
                         mRoutine.setDaysAWeek(Integer.parseInt(s.toString()));
+                        RoutineJournal.get(getActivity()).updateRoutine(mRoutine);
                         mViewPager.getAdapter().notifyDataSetChanged();
                     }
                 }
@@ -171,6 +173,14 @@ public class RoutineFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        RoutineJournal.get(getActivity())
+                .updateRoutine(mRoutine);
+    }
+
     private class SetTemplateTask extends AsyncTask<Integer, Void, Integer> {
         protected Integer doInBackground(Integer... position) {
             mRoutine.setTemplateId(position[0]);
@@ -181,6 +191,7 @@ public class RoutineFragment extends Fragment {
             if (result != 0) {
                 /* Here, we refresh the View Pager by simply giving it a new adapter.
                    This is pretty bad practice and should be avoided in the final build.*/
+                RoutineJournal.get(getActivity()).updateRoutine(mRoutine);
                 mViewPager.setAdapter(new RoutinePagerAdapter(getActivity()
                         .getSupportFragmentManager(), mRoutine));
                 mCycleLengthField.setText(Integer.toString(mRoutine.getCycleLength()));

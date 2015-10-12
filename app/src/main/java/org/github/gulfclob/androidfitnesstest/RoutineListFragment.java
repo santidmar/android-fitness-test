@@ -74,6 +74,7 @@ public class RoutineListFragment extends Fragment {
             mAdapter = new RoutineAdapter(routines);
             mRoutineRecyclerView.setAdapter(mAdapter);
         } else {
+            mAdapter.setRoutines(routines);
             mAdapter.notifyDataSetChanged();
         }
     }
@@ -137,6 +138,10 @@ public class RoutineListFragment extends Fragment {
         @Override
         public int getItemCount() {
             return mRoutines.size();
+        }
+
+        public void setRoutines(List<Routine> routines) {
+            mRoutines = routines;
         }
     }
 }

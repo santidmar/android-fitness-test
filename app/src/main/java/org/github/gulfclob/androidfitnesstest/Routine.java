@@ -29,7 +29,11 @@ public class Routine {
     private ArrayList<ArrayList<ArrayList<Exercise>>> mExercises;
 
     public Routine() {
-        mId = UUID.randomUUID();
+        this(UUID.randomUUID());
+    }
+
+    public Routine(UUID id) {
+        mId = id;
         mExercises = new ArrayList<>();
         mTemplateId = 0;
     }
@@ -90,6 +94,10 @@ public class Routine {
 
     public ArrayList<ArrayList<ArrayList<Exercise>>> getExercises() {
         return mExercises;
+    }
+
+    public void setExercises(ArrayList<ArrayList<ArrayList<Exercise>>> exercises) {
+        mExercises = exercises;
     }
 
     public int getTemplateId() {
