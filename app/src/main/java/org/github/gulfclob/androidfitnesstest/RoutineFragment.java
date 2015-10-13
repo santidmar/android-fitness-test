@@ -74,15 +74,6 @@ public class RoutineFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("RoutineFragment", "onItemSelected called at position " + position);
                 new SetTemplateTask().execute(position);
-                /*mRoutine.setTemplateId(position);
-                if (position != 0) {
-                    /* Here, we refresh the View Pager by simply giving it a new adapter.
-                       This is pretty bad practice and should be avoided in the final build.
-                    mViewPager.setAdapter(new RoutinePagerAdapter(getActivity()
-                            .getSupportFragmentManager(), mRoutine));
-                    mCycleLengthField.setText(Integer.toString(mRoutine.getCycleLength()));
-                    mDaysWeekField.setText(Integer.toString(mRoutine.getDaysAWeek()));
-                }*/
             }
 
             @Override

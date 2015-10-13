@@ -4,12 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import org.github.gulfclob.androidfitnesstest.RoutineDbSchema.RoutineTable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -59,7 +64,7 @@ public class RoutineJournal {
     public Routine getRoutine(UUID id) {
         RoutineCursorWrapper cursor = queryRoutines(
                 RoutineTable.Cols.UUID + " = ?",
-                new String[] { id.toString() }
+                new String[]{id.toString()}
         );
 
         try {
@@ -80,7 +85,7 @@ public class RoutineJournal {
 
         mDatabase.update(RoutineTable.NAME, values,
                 RoutineTable.Cols.UUID + " = ?",
-                new String[] { uuidString });
+                new String[]{uuidString});
     }
 
     private static ContentValues getContentValues(Routine routine) {
@@ -90,17 +95,25 @@ public class RoutineJournal {
         values.put(RoutineTable.Cols.TEMPLATE_ID, routine.getTemplateId());
         values.put(RoutineTable.Cols.DAYS_A_WEEK, routine.getDaysAWeek());
         values.put(RoutineTable.Cols.CYCLE_LENGTH, routine.getCycleLength());
-        /*
-        JSONObject routineJson = new JSONObject();
-        try {
-            routineJson.put("exercises", new JSONArray(routine.getExercises()));
-        } catch (JSONException jsonException) {
-            jsonException.printStackTrace();
-        }
-        */
-        values.put(RoutineTable.Cols.EXERCISES, "");
+        values.put(RoutineTable.Cols.EXERCISES, serializeRoutine(routine.getExercises()));
 
         return values;
+    }
+
+    private static byte[] serializeRoutine(ArrayList<ArrayList<ArrayList<Exercise>>> exercises) {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        try {
+            ObjectOutput out = new ObjectOutputStream(bos);
+            out.writeObject(exercises);
+            out.close();
+
+            return bos.toByteArray();
+        } catch(IOException ioe) {
+            Log.e("serializeObject", "error", ioe);
+
+            return null;
+        }
     }
 
     private RoutineCursorWrapper queryRoutines(String whereClause, String[] whereArgs) {

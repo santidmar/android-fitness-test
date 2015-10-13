@@ -1,6 +1,8 @@
 package org.github.gulfclob.androidfitnesstest;
 
-public class Exercise {
+import java.io.Serializable;
+
+public class Exercise implements Serializable {
     private String mTitle;
     private int mSets;
     private int mReps;
