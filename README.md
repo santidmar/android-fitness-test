@@ -5,12 +5,18 @@ android-fitness-test
 &nbsp;&nbsp;&nbsp;&nbsp;Development for this prototype is no longer underway. I am currently working on a more polished version in private. The following are screenshots from the latest version of mine.
 
 Strength Standards:
-- http://imgur.com/xMAZhpW
-- http://imgur.com/Dm90VDx
+- http://imgur.com/ZjYsfJe
+- http://imgur.com/0YtXt3G
 
 TDEE Calculator:
-- http://imgur.com/XFe64m0
+- http://imgur.com/PbjXsXC
+- http://imgur.com/MInbp65
 
 My Info:
-- http://imgur.com/0ZAAwgK
-- http://imgur.com/y0ACRGR
+- http://imgur.com/gMdHd3s
+- http://imgur.com/KLTZ0vT
+
+Routines:
+- http://imgur.com/8Ar7H3z
+- http://imgur.com/I1gBsnc
+- http://imgur.com/NGMh2wd
